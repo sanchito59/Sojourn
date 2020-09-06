@@ -1,7 +1,7 @@
 {
-  "name": "chroma",
+  "name": "sojourn",
   "version": "1.0.0",
-  "description": "Color Palette Generator",
+  "description": "Sharing locations off the beaten path",
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
