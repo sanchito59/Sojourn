@@ -1,0 +1,3 @@
+{
+  "mongoURI": "mongodb+srv://sanchito59:my_password@chroma.5o9p1.mongodb.net/Chroma?retryWrites=true&w=majority"
+}
