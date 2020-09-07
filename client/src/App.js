@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/organisms/Navbar';
+import CustomAlert from './components/atoms/CustomAlert';
 import Register from './components/organisms/auth/Register';
 import Login from './components/organisms/auth/Login';
 import Landing from './components/pages/Landing';
@@ -16,6 +17,7 @@ const App = () => {
           <Navbar />
           <Route exact path="/" component={Landing} />
           <>
+            <CustomAlert />
             <Switch>
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
