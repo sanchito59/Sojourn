@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Box, Typography, Button } from "@material-ui/core";
+import CustomLink from "../../atoms/CustomLink";
 import styled from "styled-components";
 
 const SignUpBtn = styled(Button)`
@@ -14,10 +15,14 @@ const Landing = () => {
           Sojourn, for explorers
         </Typography>
         <SignUpBtn my={4} variant="contained" color="primary">
-          Sign Up
+          <CustomLink to="/register" color="white">
+            Sign Up
+          </CustomLink>
         </SignUpBtn>
         <Button variant="contained" color="default">
-          Register
+          <CustomLink to="/login" color="black">
+            Login
+          </CustomLink>
         </Button>
       </Box>
     </Container>

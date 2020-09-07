@@ -8,6 +8,7 @@ import {
   IconButton,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import CustomLink from "../../atoms/CustomLink";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,11 +38,25 @@ export default function Navbar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Sojourn
+            <CustomLink to="/" color="white">
+              Sojourn
+            </CustomLink>
           </Typography>
-          <Button color="inherit">Explorers</Button>
-          <Button color="inherit">Register</Button>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit">
+            <CustomLink to="/explorers" color="white">
+              Explorers
+            </CustomLink>
+          </Button>
+          <Button color="inherit">
+            <CustomLink to="/register" color="white">
+              Register
+            </CustomLink>
+          </Button>
+          <Button color="inherit">
+            <CustomLink to="/login" color="white">
+              Login
+            </CustomLink>
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
