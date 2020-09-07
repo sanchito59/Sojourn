@@ -38,7 +38,7 @@ router.post(
     }
   });
 
-//@todo         Make public?
+// @todo         Make public?
 // @route       GET api/posts
 // @desc        Get all posts
 // @access      Private   
@@ -52,7 +52,7 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-// @route       GET api/posts
+// @route       GET api/posts/:id
 // @desc        Get a post by ID
 // @access      Private   
 router.get('/:id', auth, async (req, res) => {
@@ -76,7 +76,7 @@ router.get('/:id', auth, async (req, res) => {
   }
 });
 
-// @route       DELETE api/posts
+// @route       DELETE api/posts/:id
 // @desc        Delete a post
 // @access      Private   
 router.delete('/:id', auth, async (req, res) => {
@@ -90,6 +90,49 @@ router.delete('/:id', auth, async (req, res) => {
 
     res.json({ msg: 'Post removed' });
 
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send('Server error')
+  }
+});
+
+// @route       PUT api/posts/like/:id
+// @desc        Like a post
+// @access      Private
+router.put('/like/:id', auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    if (!post) return res.status(400).json({ msg: 'Post does not exist' });
+    if (post.likes.filter(like => like.user.toString() === req.user.id).length > 0) return res.status(400).json({ msg: 'Post already liked' });
+
+    post.likes.unshift({ user: req.user.id })
+
+    await post.save();
+
+    res.json(post.likes);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send('Server error')
+  }
+});
+
+// @route       DELETE api/posts/like/:id
+// @desc        Unlike a post
+// @access      Private
+router.put('/unlike/:id', auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    if (!post) return res.status(400).json({ msg: 'Post does not exist' });
+    if (post.likes.filter(like => like.user.toString() === req.user.id).length === 0) return res.status(400).json({ msg: 'Post has not been liked' });
+
+    const removeIndex = post.likes.map(like => like.user.toString()).indexOf(req.user.id);
+    post.likes.splice(removeIndex, 1);
+
+    await post.save();
+
+    res.json(post.likes);
   } catch (err) {
     console.error(err);
     return res.status(500).send('Server error')
