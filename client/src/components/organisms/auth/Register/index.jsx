@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { setAlert } from "../../../../actions/alert";
 import { register } from "../../../../actions/auth";
 import {
@@ -13,7 +14,7 @@ import {
 import CustomLink from "../../../atoms/CustomLink";
 import CustomPaper from "../../../atoms/CustomPaper";
 
-const Register = ({ register, setAlert }) => {
+const Register = ({ register, setAlert, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -34,6 +35,8 @@ const Register = ({ register, setAlert }) => {
       register({ name, email, password });
     }
   };
+
+  if (isAuthenticated) return <Redirect to="/dashboard" />;
 
   return (
     <>
@@ -109,6 +112,11 @@ const Register = ({ register, setAlert }) => {
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
 };
 
-export default connect(null, { register, setAlert })(Register);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { register, setAlert })(Register);
