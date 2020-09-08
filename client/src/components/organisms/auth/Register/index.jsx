@@ -11,7 +11,7 @@ import {
   TextField,
   FormControl,
 } from "@material-ui/core";
-import { PersonAddOutlined, Person } from "@material-ui/icons";
+import { PersonAddOutlined } from "@material-ui/icons";
 import CustomLink from "../../../atoms/CustomLink";
 import CustomPaper from "../../../atoms/CustomPaper";
 
