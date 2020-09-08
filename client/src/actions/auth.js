@@ -3,7 +3,31 @@ import { setAlert } from './alert';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
+  USER_LOADED,
+  AUTH_ERROR,
 } from './types';
+import setAuthToken from '../utils/setAuthToken';
+
+// LOAD USER
+export const loadUser = () => async dispatch => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token) // @TODO: No local storage
+  }
+
+  try {
+    const res = await axios.get('/api/auth');
+
+    dispatch({
+      type: USER_LOADED,
+      payload: res.data
+    });
+
+  } catch (error) {
+    dispatch({
+      type: AUTH_ERROR,
+    })
+  }
+};
 
 // REGISTER USER
 export const register = ({ name, email, password }) => async dispatch => {
@@ -11,7 +35,7 @@ export const register = ({ name, email, password }) => async dispatch => {
     headers: {
       'Content-Type': 'application/json'
     }
-  }
+  };
 
   const body = JSON.stringify({ name, email, password });
 
