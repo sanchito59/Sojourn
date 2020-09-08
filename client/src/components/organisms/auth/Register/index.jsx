@@ -11,6 +11,7 @@ import {
   TextField,
   FormControl,
 } from "@material-ui/core";
+import { PersonAddOutlined, Person } from "@material-ui/icons";
 import CustomLink from "../../../atoms/CustomLink";
 import CustomPaper from "../../../atoms/CustomPaper";
 
@@ -46,8 +47,9 @@ const Register = ({ register, setAlert, isAuthenticated }) => {
             <Typography variant="h4" component="h1" paragraph>
               Sign Up
             </Typography>
+            <PersonAddOutlined />
             <Typography variant="h6" paragraph>
-              [@] Create Your Account
+              Create Your Account
             </Typography>
             <form onSubmit={(e) => onSubmit(e)}>
               <FormControl>

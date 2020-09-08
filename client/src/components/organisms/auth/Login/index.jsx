@@ -10,6 +10,7 @@ import {
   TextField,
   FormControl,
 } from "@material-ui/core";
+import { DoneOutline } from "@material-ui/icons";
 import CustomPaper from "../../../atoms/CustomPaper";
 import CustomLink from "../../../atoms/CustomLink";
 
@@ -40,8 +41,9 @@ const Login = ({ login, isAuthenticated }) => {
             <Typography variant="h4" component="h1" paragraph>
               Sign In
             </Typography>
+            <DoneOutline />
             <Typography variant="h6" paragraph>
-              [@] Log into your account
+              Log into your account
             </Typography>
             <form onSubmit={(e) => onSubmit(e)}>
               <FormControl>

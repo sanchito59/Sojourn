@@ -10,7 +10,7 @@ import {
   Button,
   IconButton,
 } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
+import { Explore, ExitToApp, Menu as MenuIcon } from "@material-ui/icons";
 import CustomLink from "../../atoms/CustomLink";
 
 const useStyles = makeStyles((theme) => ({
@@ -36,7 +36,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         </CustomLink>
       </Button>
       <Button color="inherit" onClick={logout}>
-        [@] Logout
+        <ExitToApp /> Logout
       </Button>
     </>
   );
@@ -65,14 +65,15 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
+          <Explore />
           <Typography variant="h6" className={classes.title}>
             <CustomLink to="/" color="white">
               Sojourn
