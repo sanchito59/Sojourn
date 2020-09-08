@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const StyledLink = styled(Link)`
   color: ${(props) => props.color};
-  text-decoration: ${(props) => !props.underline && "none"}; ;
+  text-decoration: ${(props) => !props.underline && "none"};
 `;
 
 function CustomLink({ children, to, color, underline }) {
