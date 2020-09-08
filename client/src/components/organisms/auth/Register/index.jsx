@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { setAlert } from "../../../../actions/alert";
+import { register } from "../../../../actions/auth";
 import {
   Box,
   Container,
@@ -11,7 +12,7 @@ import {
 } from "@material-ui/core";
 import CustomLink from "../../../atoms/CustomLink";
 
-const Register = ({ setAlert }) => {
+const Register = ({ register, setAlert }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -29,7 +30,7 @@ const Register = ({ setAlert }) => {
     if (password !== passwordConfirmation) {
       setAlert("Passwords do not match", "error");
     } else {
-      console.log(formData);
+      register({ name, email, password });
     }
   };
 
@@ -52,7 +53,6 @@ const Register = ({ setAlert }) => {
                 name="name"
                 value={name}
                 onChange={(e) => onChange(e)}
-                required
               />
             </FormControl>
             <FormControl>
@@ -104,6 +104,7 @@ const Register = ({ setAlert }) => {
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
 };
 
-export default connect(null, { setAlert })(Register);
+export default connect(null, { register, setAlert })(Register);
