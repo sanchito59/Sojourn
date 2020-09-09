@@ -23,8 +23,11 @@ import {
 } from "@material-ui/icons";
 import CustomLink from "../../atoms/CustomLink";
 import CustomPaper from "../../atoms/CustomPaper";
+import { createProfile } from "../../../actions/profile";
+import { useHistory } from "react-router-dom";
 
-const CreateProfile = (props) => {
+const CreateProfile = ({ createProfile }) => {
+  const history = useHistory();
   const [socialVisibility, setSocialVisibility] = useState(false);
   const [formData, setFormData] = useState({
     company: "",
@@ -57,6 +60,12 @@ const CreateProfile = (props) => {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    createProfile(formData, history);
+  };
+
   return (
     <>
       <Container>
@@ -68,7 +77,7 @@ const CreateProfile = (props) => {
             <Typography variant="h6" component="h2" paragraph>
               <Face /> Let's get to know each other!
             </Typography>
-            <form>
+            <form onSubmit={(e) => onSubmit(e)}>
               <FormControl style={{ minWidth: "70px", marginRight: "8px" }}>
                 {/* @TODO: styles */}
                 <InputLabel>Status</InputLabel>
@@ -245,6 +254,8 @@ const CreateProfile = (props) => {
   );
 };
 
-CreateProfile.propTypes = {};
+CreateProfile.propTypes = {
+  createProfile: PropTypes.func.isRequired,
+};
 
-export default connect()(CreateProfile);
+export default connect(null, { createProfile })(CreateProfile);
