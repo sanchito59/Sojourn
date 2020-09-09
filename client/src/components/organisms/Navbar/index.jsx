@@ -10,7 +10,12 @@ import {
   Button,
   IconButton,
 } from "@material-ui/core";
-import { Explore, ExitToApp, Menu as MenuIcon } from "@material-ui/icons";
+import {
+  Explore,
+  ExitToApp,
+  Menu as MenuIcon,
+  AccountBox,
+} from "@material-ui/icons";
 import CustomLink from "../../atoms/CustomLink";
 
 const useStyles = makeStyles((theme) => ({
@@ -33,6 +38,12 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       <Button color="inherit">
         <CustomLink to="/explorers" color="white">
           Explorers
+        </CustomLink>
+      </Button>
+      <Button color="inherit">
+        <AccountBox />
+        <CustomLink to="/explorers" color="white">
+          Dashboard
         </CustomLink>
       </Button>
       <Button color="inherit" onClick={logout}>
