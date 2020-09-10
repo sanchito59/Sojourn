@@ -51,6 +51,7 @@ router.post(
 
     profileFields.user = req.user.id;
 
+    // @TODO remove if-tower
     if (company) profileFields.company = company;
     if (website) profileFields.website = website;
     if (location) profileFields.location = location;

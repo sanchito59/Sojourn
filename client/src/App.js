@@ -8,6 +8,7 @@ import Landing from './components/pages/Landing';
 import Dashboard from './components/pages/Dashboard';
 import PrivateRoute from './components/molecules/PrivateRoute';
 import CreateProfile from './components/molecules/CreateProfile';
+import EditProfile from './components/molecules/EditProfile';
 import { Provider } from 'react-redux';
 import { loadUser } from './actions/auth';
 import store from './store';
@@ -37,6 +38,7 @@ const App = () => {
               <Route exact path="/login" component={Login} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/create-profile" component={CreateProfile} />
+              <PrivateRoute exact path="/edit-profile" component={EditProfile} />
             </Switch>
           </>
         </>

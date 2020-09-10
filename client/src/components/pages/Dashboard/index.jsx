@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../../../actions/profile";
 import { Button, CircularProgress, Typography } from "@material-ui/core";
+import DashboardActions from "../../molecules/DashboardActions";
 import CustomLink from "../../atoms/CustomLink";
 
 const Dashboard = ({
@@ -25,7 +26,9 @@ const Dashboard = ({
         <Typography variant="p">Welcome, {user && user.name}</Typography>
       </div>
       {profile !== null ? (
-        <>has</>
+        <>
+          <DashboardActions />
+        </>
       ) : (
         <>
           <Typography variant="p">
