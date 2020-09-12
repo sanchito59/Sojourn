@@ -32,8 +32,13 @@ const Dashboard = ({
       {profile !== null ? (
         <>
           <DashboardActions />
-          <ExperienceList experience={profile.experience} />
-          <EducationList education={profile.education} />
+          {profile.experience.length > 0 && (
+            <ExperienceList experience={profile.experience} />
+          )}
+          {profile.education.length > 0 && (
+            <EducationList education={profile.education} />
+          )}
+          {/* @TODO: POPOVER/MODAL INSTEAD OF WINDOW CONFIRM */}
           <Button
             variant="contained"
             color="secondary"
