@@ -31,7 +31,7 @@ export const getCurrentProfile = () => async dispatch => {
 // GET ALL PROFILES
 export const getProfiles = () => async dispatch => {
   try {
-    const res = await axios.get('/api/profiles');
+    const res = await axios.get('/api/profile');
 
     dispatch({
       type: GET_PROFILES,
