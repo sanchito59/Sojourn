@@ -10,11 +10,11 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Typography,
 } from "@material-ui/core";
 import CustomPaper from "../../atoms/CustomPaper";
+import { deleteExperience } from "../../../actions/profile";
 
-const ExperienceList = ({ experience }) => {
+const ExperienceList = ({ experience, deleteExperience }) => {
   return (
     <CustomPaper marginTop="20">
       <TableContainer>
@@ -43,7 +43,11 @@ const ExperienceList = ({ experience }) => {
                     )}
                   </TableCell>
                   <TableCell align="right">
-                    <Button variant="contained" color="secondary">
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => deleteExperience(exp._id)}
+                    >
                       DELETE
                     </Button>
                   </TableCell>
@@ -59,6 +63,7 @@ const ExperienceList = ({ experience }) => {
 
 ExperienceList.propTypes = {
   experience: PropTypes.array.isRequired,
+  deleteExperience: PropTypes.func.isRequired,
 };
 
-export default connect()(ExperienceList);
+export default connect(null, { deleteExperience })(ExperienceList);

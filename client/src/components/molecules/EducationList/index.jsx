@@ -10,11 +10,11 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Typography,
 } from "@material-ui/core";
 import CustomPaper from "../../atoms/CustomPaper";
+import { deleteEducation } from "../../../actions/profile";
 
-const EducationList = ({ education }) => {
+const EducationList = ({ education, deleteEducation }) => {
   return (
     <CustomPaper marginTop="20">
       <TableContainer>
@@ -43,7 +43,11 @@ const EducationList = ({ education }) => {
                     )}
                   </TableCell>
                   <TableCell align="right">
-                    <Button variant="contained" color="secondary">
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => deleteEducation(edu._id)}
+                    >
                       DELETE
                     </Button>
                   </TableCell>
@@ -59,6 +63,7 @@ const EducationList = ({ education }) => {
 
 EducationList.propTypes = {
   education: PropTypes.array.isRequired,
+  deleteEducation: PropTypes.func.isRequired,
 };
 
-export default connect()(EducationList);
+export default connect(null, { deleteEducation })(EducationList);
