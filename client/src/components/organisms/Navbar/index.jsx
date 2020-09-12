@@ -42,7 +42,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       </Button>
       <Button color="inherit">
         <AccountBox />
-        <CustomLink to="/explorers" color="white">
+        <CustomLink to="/dashboard" color="white">
           Dashboard
         </CustomLink>
       </Button>
@@ -76,6 +76,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
+          {/* @TODO: USE OR DELETE */}
           {/* <IconButton
             edge="start"
             className={classes.menuButton}
