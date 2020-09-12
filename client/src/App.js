@@ -7,8 +7,10 @@ import Login from './components/organisms/auth/Login';
 import Landing from './components/pages/Landing';
 import Dashboard from './components/pages/Dashboard';
 import PrivateRoute from './components/molecules/PrivateRoute';
-import CreateProfile from './components/molecules/CreateProfile';
-import EditProfile from './components/molecules/EditProfile';
+import CreateProfile from './components/molecules/Forms/CreateProfile';
+import EditProfile from './components/molecules/Forms/EditProfile';
+import AddExperience from './components/molecules/Forms/AddExperience';
+import AddEducation from './components/molecules/Forms/AddEducation';
 import { Provider } from 'react-redux';
 import { loadUser } from './actions/auth';
 import store from './store';
@@ -39,6 +41,8 @@ const App = () => {
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/create-profile" component={CreateProfile} />
               <PrivateRoute exact path="/edit-profile" component={EditProfile} />
+              <PrivateRoute exact path="/add-experience" component={AddExperience} />
+              <PrivateRoute exact path="/add-education" component={AddEducation} />
             </Switch>
           </>
         </>

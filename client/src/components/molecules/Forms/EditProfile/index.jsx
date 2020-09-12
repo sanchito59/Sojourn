@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import {
@@ -21,12 +21,22 @@ import {
   OndemandVideo,
   Instagram,
 } from "@material-ui/icons";
-import CustomLink from "../../atoms/CustomLink";
-import CustomPaper from "../../atoms/CustomPaper";
-import { createProfile } from "../../../actions/profile";
+import styled from "styled-components";
+import CustomLink from "../../../atoms/CustomLink";
+import CustomPaper from "../../../atoms/CustomPaper";
+import { createProfile, getCurrentProfile } from "../../../../actions/profile";
 import { useHistory } from "react-router-dom";
 
-const CreateProfile = ({ createProfile }) => {
+const TextArea = styled.textarea`
+  width: 260px;
+  height: 70px;
+`;
+
+const EditProfile = ({
+  profile: { profile, loading },
+  createProfile,
+  getCurrentProfile,
+}) => {
   const history = useHistory();
   const [socialVisibility, setSocialVisibility] = useState(false);
   const [formData, setFormData] = useState({
@@ -42,6 +52,24 @@ const CreateProfile = ({ createProfile }) => {
     youtube: "",
     instagram: "",
   });
+
+  useEffect(() => {
+    getCurrentProfile();
+
+    setFormData({
+      status: loading || !profile.status ? "" : profile.status,
+      company: loading || !profile.company ? "" : profile.company,
+      website: loading || !profile.website ? "" : profile.website,
+      location: loading || !profile.location ? "" : profile.location,
+      hobbies: loading || !profile.hobbies ? "" : profile.hobbies.join(","),
+      bio: loading || !profile.bio ? "" : profile.bio,
+      twitter: loading || !profile.social ? "" : profile.social.twitter,
+      facebook: loading || !profile.social ? "" : profile.social.facebook,
+      linkedin: loading || !profile.social ? "" : profile.social.linkedin,
+      youtube: loading || !profile.social ? "" : profile.social.youtube,
+      instagram: loading || !profile.social ? "" : profile.social.instagram,
+    });
+  }, [loading]);
 
   const {
     company,
@@ -63,7 +91,7 @@ const CreateProfile = ({ createProfile }) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    createProfile(formData, history);
+    createProfile(formData, history, true); // true for EDIT
   };
 
   return (
@@ -135,12 +163,12 @@ const CreateProfile = ({ createProfile }) => {
                 />
               </FormControl>
               <FormControl style={{ marginRight: "8px" }}>
-                <textarea
+                <TextArea
                   placeholder="A short bio of yourself"
                   name="bio"
                   value={bio}
                   onChange={(e) => onChange(e)}
-                ></textarea>
+                />
               </FormControl>
 
               <div>
@@ -240,7 +268,7 @@ const CreateProfile = ({ createProfile }) => {
               )}
               <TextField
                 type="submit"
-                value="Create Profile"
+                value="Save Changes"
                 style={{ marginTop: "16px" }}
               />
               <Typography variant="h6" paragraph>
@@ -254,8 +282,16 @@ const CreateProfile = ({ createProfile }) => {
   );
 };
 
-CreateProfile.propTypes = {
+EditProfile.propTypes = {
   createProfile: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
 };
 
-export default connect(null, { createProfile })(CreateProfile);
+const mapStateToProps = (state) => ({
+  profile: state.profile,
+});
+
+export default connect(mapStateToProps, { createProfile, getCurrentProfile })(
+  EditProfile
+);
