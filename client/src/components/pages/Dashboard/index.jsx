@@ -5,6 +5,8 @@ import { getCurrentProfile } from "../../../actions/profile";
 import { Button, CircularProgress, Typography } from "@material-ui/core";
 import DashboardActions from "../../molecules/DashboardActions";
 import CustomLink from "../../atoms/CustomLink";
+import ExperienceList from "../../molecules/ExperienceList";
+import EducationList from "../../molecules/EducationList";
 
 const Dashboard = ({
   getCurrentProfile,
@@ -28,6 +30,8 @@ const Dashboard = ({
       {profile !== null ? (
         <>
           <DashboardActions />
+          <ExperienceList experience={profile.experience} />
+          <EducationList education={profile.education} />
         </>
       ) : (
         <>
