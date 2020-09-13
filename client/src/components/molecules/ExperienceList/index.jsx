@@ -14,7 +14,7 @@ import {
 import CustomPaper from "../../atoms/CustomPaper";
 import { deleteExperience } from "../../../actions/profile";
 
-const ExperienceList = ({ experience, deleteExperience }) => {
+const ExperienceList = ({ experience, deleteExperience, privateView }) => {
   return (
     <CustomPaper marginTop="20">
       <TableContainer>
@@ -42,15 +42,17 @@ const ExperienceList = ({ experience, deleteExperience }) => {
                       <Moment format="MMMM Do YYYY">{exp.to}</Moment>
                     )}
                   </TableCell>
-                  <TableCell align="right">
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      onClick={() => deleteExperience(exp._id)}
-                    >
-                      DELETE
-                    </Button>
-                  </TableCell>
+                  {!privateView && (
+                    <TableCell align="right">
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={() => deleteExperience(exp._id)}
+                      >
+                        DELETE
+                      </Button>
+                    </TableCell>
+                  )}
                 </TableRow>
               );
             })}
@@ -64,6 +66,11 @@ const ExperienceList = ({ experience, deleteExperience }) => {
 ExperienceList.propTypes = {
   experience: PropTypes.array.isRequired,
   deleteExperience: PropTypes.func.isRequired,
+  privateView: PropTypes.bool,
+};
+
+ExperienceList.defaultProps = {
+  privateView: false,
 };
 
 export default connect(null, { deleteExperience })(ExperienceList);

@@ -14,7 +14,7 @@ import {
 import CustomPaper from "../../atoms/CustomPaper";
 import { deleteEducation } from "../../../actions/profile";
 
-const EducationList = ({ education, deleteEducation }) => {
+const EducationList = ({ education, deleteEducation, privateView }) => {
   return (
     <CustomPaper marginTop="20">
       <TableContainer>
@@ -42,15 +42,17 @@ const EducationList = ({ education, deleteEducation }) => {
                       <Moment format="MMMM Do YYYY">{edu.to}</Moment>
                     )}
                   </TableCell>
-                  <TableCell align="right">
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      onClick={() => deleteEducation(edu._id)}
-                    >
-                      DELETE
-                    </Button>
-                  </TableCell>
+                  {!privateView && (
+                    <TableCell align="right">
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={() => deleteEducation(edu._id)}
+                      >
+                        DELETE
+                      </Button>
+                    </TableCell>
+                  )}
                 </TableRow>
               );
             })}
@@ -64,6 +66,11 @@ const EducationList = ({ education, deleteEducation }) => {
 EducationList.propTypes = {
   education: PropTypes.array.isRequired,
   deleteEducation: PropTypes.func.isRequired,
+  privateView: PropTypes.bool,
+};
+
+EducationList.defaultProps = {
+  privateView: false,
 };
 
 export default connect(null, { deleteEducation })(EducationList);

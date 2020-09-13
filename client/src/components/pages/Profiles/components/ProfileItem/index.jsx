@@ -31,7 +31,7 @@ const ProfileItem = ({
               image={avatar}
             />
             <Button color="primary">
-              <CustomLink to={`/profile/${_id}`}>View Profile</CustomLink>
+              <CustomLink to={`/explorer/${_id}`}>View Profile</CustomLink>
             </Button>
           </>
           <Typography variant="body2" color="textSecondary" component="p">
