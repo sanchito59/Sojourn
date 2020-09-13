@@ -66,7 +66,7 @@ export const getProfileById = (userId) => async dispatch => {
 // GET PROFILE LOCATION WEATHER
 export const getWeather = (location) => async dispatch => {
   try {
-    const res = await axios.get(`/api/weather/${location}`);
+    const res = await axios.get(`/api/profile/weather/${location}`);
 
     dispatch({
       type: GET_WEATHER,

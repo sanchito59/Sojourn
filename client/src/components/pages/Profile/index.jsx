@@ -26,6 +26,7 @@ import CustomPaper from "../../atoms/CustomPaper";
 import { getProfileById } from "../../../actions/profile";
 import ExperienceList from "../../molecules/ExperienceList";
 import EducationList from "../../molecules/EducationList";
+import WeatherForecast from "../../organisms/WeatherForecast";
 
 const ProfilePicture = styled.img`
   border-radius: 50%;
@@ -139,7 +140,7 @@ const Profile = ({
                 {profile.bio}
               </Typography>
             </Grid>
-            {Object.keys(profile.social).length > 0 && (
+            {profile.social?.length > 0 && (
               <Grid
                 gridItem
                 sm={12}
@@ -149,6 +150,7 @@ const Profile = ({
                   marginTop: "20px",
                 }}
               >
+                {/* @TODO: FIX THIS D: */}
                 {profile.social.facebook && (
                   <a
                     href={
@@ -239,26 +241,40 @@ const Profile = ({
                 )}
               </Grid>
             )}
-            {profile.hobbies.length > 0 && (
-              <Grid gridItem sm={12}>
-                <CustomPaper elevation={1} padding="8" marginTop="40">
-                  <Typography variant="h5">Hobbies</Typography>
-                  <List>
-                    {profile.hobbies.map((hobby) => {
-                      return (
-                        <ListItem>
-                          <ListItemText primary={hobby} />
-                        </ListItem>
-                      );
-                    })}
-                  </List>
-                </CustomPaper>
-              </Grid>
-            )}
+            <Container style={{ display: "flex" }}>
+              {profile.location && (
+                <Grid
+                  gridItem
+                  sm={2}
+                  xs={6}
+                  align="center"
+                  style={{ marginTop: "40px" }}
+                >
+                  <WeatherForecast city={profile.location} />
+                </Grid>
+              )}
+              {profile.hobbies.length > 0 && (
+                <Grid gridItem sm={12} xs={6}>
+                  <CustomPaper elevation={1} padding="8" marginTop="40">
+                    <Typography variant="h5">Hobbies</Typography>
+                    <List>
+                      {profile.hobbies.map((hobby) => {
+                        return (
+                          <ListItem>
+                            <ListItemText primary={hobby} />
+                          </ListItem>
+                        );
+                      })}
+                    </List>
+                  </CustomPaper>
+                </Grid>
+              )}
+            </Container>
             {profile.education.length > 0 && (
               <Grid gridItem sm={12}>
                 <CustomPaper elevation={1} padding="8" marginTop="40">
                   <Typography variant="h5">Education</Typography>
+                  {/* @TODO: CREATE NEW COMPONENTS */}
                   <EducationList education={profile.education} privateView />
                 </CustomPaper>
               </Grid>

@@ -55,8 +55,6 @@ const AddEducation = ({ addEducation }) => {
     addEducation(formData, history);
   };
 
-  console.log(formData);
-
   return (
     <Container>
       <CustomPaper elevation={1} padding={20} mt="40px">

@@ -268,7 +268,7 @@ router.delete('/education/:edu_id', auth, async (req, res) => {
 router.get('/weather/:city', async (req, res) => {
   try {
     const options = {
-      uri: `https://api.openweathermap.org/data/2.5/forecast?q=${req.params.city},&units=imperial&appid=${config.get('openWeatherKey')}`,
+      uri: `https://api.openweathermap.org/data/2.5/weather?q=${req.params.city},&units=imperial&appid=${config.get('openWeatherKey')}`, // @TODO, this now gets just the current weather now, the 5 day forecast gave 40, 3 hour weather responses
       method: 'GET',
       headers: { 'user-agent': 'node.js' },
     };
