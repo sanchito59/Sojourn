@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import {
+  Avatar,
   Box,
   Breadcrumbs,
   CircularProgress,
@@ -13,6 +14,13 @@ import {
   ListItemText,
   Typography,
 } from "@material-ui/core";
+import {
+  Facebook,
+  Twitter,
+  LinkedIn,
+  OndemandVideo,
+  Instagram,
+} from "@material-ui/icons";
 import CustomLink from "../../atoms/CustomLink";
 import CustomPaper from "../../atoms/CustomPaper";
 import { getProfileById } from "../../../actions/profile";
@@ -35,6 +43,35 @@ const WebsiteLink = styled.a`
   }
 `;
 
+const InstagramAvatar = styled(Avatar)`
+  background: -moz-linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
+  background: -webkit-linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
+  background: linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
+`;
+
+const http = "https://";
 const Profile = ({
   match,
   auth,
@@ -48,7 +85,7 @@ const Profile = ({
   return loading || profile === null ? (
     <CircularProgress />
   ) : (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" style={{ marginBottom: "40px" }}>
       <Breadcrumbs aria-label="breadcrumb" style={{ marginTop: "40px" }}>
         <CustomLink color="inherit" to="/explorers">
           Explorers
@@ -60,7 +97,7 @@ const Profile = ({
           )}
         <Typography color="textPrimary">{profile.user.name}</Typography>
       </Breadcrumbs>
-      <CustomPaper padding="8" marginTop="40">
+      <CustomPaper elevation={1} padding="8" marginTop="40">
         <Box my={4}>
           <Grid container>
             <Grid gridItem sm={4} align="center">
@@ -102,31 +139,136 @@ const Profile = ({
                 {profile.bio}
               </Typography>
             </Grid>
-            <Grid gridItem sm={12}></Grid>
+            {Object.keys(profile.social).length > 0 && (
+              <Grid
+                gridItem
+                sm={12}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "20px",
+                }}
+              >
+                {profile.social.facebook && (
+                  <a
+                    href={
+                      profile.social.facebook.includes("http")
+                        ? profile.social.facebook
+                        : http + profile.social.facebook
+                    }
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    style={{ marginRight: "8px" }}
+                  >
+                    <Avatar
+                      style={{ color: "white", backgroundColor: "#4267B2" }}
+                    >
+                      <Facebook />
+                    </Avatar>
+                  </a>
+                )}
+                {profile.social.twitter && (
+                  <a
+                    href={
+                      profile.social.twitter.includes("http")
+                        ? profile.social.twitter
+                        : http + profile.social.twitter
+                    }
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    style={{ marginRight: "8px" }}
+                  >
+                    <Avatar
+                      style={{ color: "white", backgroundColor: "#1da1f2" }}
+                    >
+                      <Twitter />
+                    </Avatar>
+                  </a>
+                )}
+                {profile.social.linkedin && (
+                  <a
+                    href={
+                      profile.social.linkedin.includes("http")
+                        ? profile.social.linkedin
+                        : http + profile.social.linkedin
+                    }
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    style={{ marginRight: "8px" }}
+                  >
+                    <Avatar
+                      style={{ color: "white", backgroundColor: "#2867b2" }}
+                    >
+                      <LinkedIn />
+                    </Avatar>
+                  </a>
+                )}
+                {profile.social.youtube && (
+                  <a
+                    href={
+                      profile.social.youtube.includes("http")
+                        ? profile.social.youtube
+                        : http + profile.social.youtube
+                    }
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    style={{ marginRight: "8px" }}
+                  >
+                    <Avatar
+                      style={{ color: "white", backgroundColor: "#FF0000" }}
+                    >
+                      <OndemandVideo />
+                    </Avatar>
+                  </a>
+                )}
+                {profile.social.instagram && (
+                  <a
+                    href={
+                      profile.social.instagram.includes("http")
+                        ? profile.social.instagram
+                        : http + profile.social.instagram
+                    }
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    style={{ marginRight: "8px" }}
+                  >
+                    <InstagramAvatar>
+                      <Instagram />
+                    </InstagramAvatar>
+                  </a>
+                )}
+              </Grid>
+            )}
             {profile.hobbies.length > 0 && (
               <Grid gridItem sm={12}>
-                <Typography variant="h5">Hobbies</Typography>
-                <List>
-                  {profile.hobbies.map((hobby) => {
-                    return (
-                      <ListItem>
-                        <ListItemText primary={hobby} />
-                      </ListItem>
-                    );
-                  })}
-                </List>
+                <CustomPaper elevation={1} padding="8" marginTop="40">
+                  <Typography variant="h5">Hobbies</Typography>
+                  <List>
+                    {profile.hobbies.map((hobby) => {
+                      return (
+                        <ListItem>
+                          <ListItemText primary={hobby} />
+                        </ListItem>
+                      );
+                    })}
+                  </List>
+                </CustomPaper>
               </Grid>
             )}
             {profile.education.length > 0 && (
               <Grid gridItem sm={12}>
-                <Typography variant="h5">Education</Typography>
-                <EducationList education={profile.education} privateView />
+                <CustomPaper elevation={1} padding="8" marginTop="40">
+                  <Typography variant="h5">Education</Typography>
+                  <EducationList education={profile.education} privateView />
+                </CustomPaper>
               </Grid>
             )}
             {profile.experience.length > 0 && (
               <Grid gridItem sm={12}>
-                <Typography variant="h5">Experience</Typography>
-                <ExperienceList experience={profile.experience} privateView />
+                <CustomPaper elevation={1} padding="8" marginTop="40">
+                  <Typography variant="h5">Experience</Typography>
+                  <ExperienceList experience={profile.experience} privateView />
+                </CustomPaper>
               </Grid>
             )}
           </Grid>

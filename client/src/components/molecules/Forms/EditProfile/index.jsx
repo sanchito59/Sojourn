@@ -69,17 +69,7 @@ const EditProfile = ({
       youtube: loading || !profile.social ? "" : profile.social.youtube,
       instagram: loading || !profile.social ? "" : profile.social.instagram,
     });
-  }, [
-    loading,
-    getCurrentProfile,
-    profile.bio,
-    profile.company,
-    profile.hobbies,
-    profile.location,
-    profile.social,
-    profile.status,
-    profile.website,
-  ]);
+  }, [loading, getCurrentProfile]); // @TODO: useReducer?
 
   const {
     company,
@@ -110,7 +100,7 @@ const EditProfile = ({
         <CustomPaper elevation={1} padding={20} marginTop={40}>
           <Box my={4}>
             <Typography variant="h4" component="h1" paragraph>
-              Create Your Profile
+              Edit Your Profile
             </Typography>
             <Typography variant="h6" component="h2" paragraph>
               <Face /> Let's get to know each other!
