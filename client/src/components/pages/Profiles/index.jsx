@@ -14,8 +14,7 @@ import ProfileItem from "./components/ProfileItem";
 const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   useEffect(() => {
     getProfiles();
-    console.log("ping");
-  }, []);
+  }, [getProfiles]);
 
   return loading && profiles === null ? (
     <CircularProgress />

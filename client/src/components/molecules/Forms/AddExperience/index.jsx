@@ -8,10 +8,9 @@ import {
   Typography,
   TextField,
   InputAdornment,
-  InputLabel,
   FormControl,
-  Button,
 } from "@material-ui/core";
+import { Business, LocationCity, Work } from "@material-ui/icons";
 import styled from "styled-components";
 import CustomLink from "../../../atoms/CustomLink";
 import CustomPaper from "../../../atoms/CustomPaper";
@@ -63,6 +62,13 @@ const AddExperience = ({ addExperience }) => {
                 name="title"
                 value={title}
                 onChange={(e) => onChange(e)}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Work />
+                    </InputAdornment>
+                  ),
+                }}
                 required
               />
             </FormControl>
@@ -72,6 +78,13 @@ const AddExperience = ({ addExperience }) => {
                 placeholder="* Company"
                 name="company"
                 value={company}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Business />
+                    </InputAdornment>
+                  ),
+                }}
                 onChange={(e) => onChange(e)}
                 required
               />
@@ -82,6 +95,13 @@ const AddExperience = ({ addExperience }) => {
                 placeholder="Location"
                 name="location"
                 value={location}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <LocationCity />
+                    </InputAdornment>
+                  ),
+                }}
                 onChange={(e) => onChange(e)}
               />
             </FormControl>

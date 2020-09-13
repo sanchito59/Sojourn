@@ -8,10 +8,9 @@ import {
   Typography,
   TextField,
   InputAdornment,
-  InputLabel,
   FormControl,
-  Button,
 } from "@material-ui/core";
+import { Book, School, Subject } from "@material-ui/icons";
 import styled from "styled-components";
 import CustomLink from "../../../atoms/CustomLink";
 import CustomPaper from "../../../atoms/CustomPaper";
@@ -73,6 +72,13 @@ const AddEducation = ({ addEducation }) => {
                 name="school"
                 value={school}
                 onChange={(e) => onChange(e)}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <School />
+                    </InputAdornment>
+                  ),
+                }}
                 required
               />
             </FormControl>
@@ -82,6 +88,13 @@ const AddEducation = ({ addEducation }) => {
                 placeholder="* Degree or Certificate"
                 name="degree"
                 value={degree}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Subject />
+                    </InputAdornment>
+                  ),
+                }}
                 onChange={(e) => onChange(e)}
                 required
               />
@@ -92,6 +105,13 @@ const AddEducation = ({ addEducation }) => {
                 placeholder="Field of Study"
                 name="fieldofstudy"
                 value={fieldofstudy}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Book />
+                    </InputAdornment>
+                  ),
+                }}
                 onChange={(e) => onChange(e)}
               />
             </FormControl>

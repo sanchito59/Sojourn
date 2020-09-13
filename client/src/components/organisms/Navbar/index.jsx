@@ -3,19 +3,8 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout } from "../../../actions/auth";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  IconButton,
-} from "@material-ui/core";
-import {
-  Explore,
-  ExitToApp,
-  Menu as MenuIcon,
-  AccountBox,
-} from "@material-ui/icons";
+import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
+import { Explore, ExitToApp, AccountBox } from "@material-ui/icons";
 import CustomLink from "../../atoms/CustomLink";
 
 const useStyles = makeStyles((theme) => ({
@@ -76,15 +65,6 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          {/* @TODO: USE OR DELETE */}
-          {/* <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton> */}
           <Explore />
           <Typography variant="h6" className={classes.title}>
             <CustomLink to="/" color="white">

@@ -4,7 +4,6 @@ import {
   Button,
   Card,
   CardHeader,
-  Avatar,
   CardMedia,
   CardContent,
   List,
@@ -12,17 +11,15 @@ import {
   Typography,
 } from "@material-ui/core";
 import CustomLink from "../../../../atoms/CustomLink";
-import CustomPaper from "../../../../atoms/CustomPaper";
 
 const ProfileItem = ({
   profile: {
     user: { _id, name, avatar },
     status,
-    location,
+    location, // @TODO: use?
     hobbies,
   },
 }) => {
-  console.log(avatar);
   return (
     <div style={{ marginTop: "20px" }}>
       <Card>
@@ -34,7 +31,7 @@ const ProfileItem = ({
               image={avatar}
             />
             <Button color="primary">
-              <CustomLink to={`/profile/${_id}`}> View Profile</CustomLink>
+              <CustomLink to={`/profile/${_id}`}>View Profile</CustomLink>
             </Button>
           </>
           <Typography variant="body2" color="textSecondary" component="p">
