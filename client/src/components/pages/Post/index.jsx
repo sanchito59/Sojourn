@@ -2,22 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 import styled from "styled-components";
-import {
-  Badge,
-  Box,
-  Button,
-  CircularProgress,
-  Container,
-  Grid,
-  IconButton,
-  Typography,
-} from "@material-ui/core";
+import { Badge, Button, Grid, IconButton, Typography } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import CustomLink from "../../atoms/CustomLink";
 import CustomPaper from "../../atoms/CustomPaper";
 import { connect } from "react-redux";
+import { addLike, removeLike } from "../../../actions/post";
 
 const ProfilePicture = styled.img`
   border-radius: 50%;
@@ -27,6 +19,8 @@ const ProfilePicture = styled.img`
 `;
 
 const Post = ({
+  addLike,
+  removeLike,
   auth,
   post: { _id, text, name, avatar, user, likes, comments, date },
 }) => {
@@ -47,12 +41,12 @@ const Post = ({
                 Posted on {moment(date).format("ddd MMM, Do - hh:ma")}
               </Grid>
               <Grid item sm={12} xs={12} style={{ display: "flex" }}>
-                <IconButton color="secondary">
+                <IconButton color="secondary" onClick={() => addLike(_id)}>
                   <Badge badgeContent={likes.length} color="secondary">
                     <FavoriteIcon />
                   </Badge>
                 </IconButton>
-                <IconButton color="secondary">
+                <IconButton color="secondary" onClick={() => removeLike(_id)}>
                   <Badge color="secondary">
                     <FavoriteBorderIcon />
                   </Badge>
@@ -81,9 +75,11 @@ const Post = ({
 Post.propTypes = {
   post: PropTypes.object.isRequired,
   state: PropTypes.object.isRequired,
+  addLike: PropTypes.func.isRequired,
+  removeLike: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
-export default connect(mapStateToProps, {})(Post);
+export default connect(mapStateToProps, { addLike, removeLike })(Post);
