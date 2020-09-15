@@ -9,7 +9,7 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import CustomLink from "../../atoms/CustomLink";
 import CustomPaper from "../../atoms/CustomPaper";
 import { connect } from "react-redux";
-import { addLike, removeLike } from "../../../actions/post";
+import { addLike, removeLike, deletePost } from "../../../actions/post";
 
 const ProfilePicture = styled.img`
   border-radius: 50%;
@@ -21,6 +21,7 @@ const ProfilePicture = styled.img`
 const Post = ({
   addLike,
   removeLike,
+  deletePost,
   auth,
   post: { _id, text, name, avatar, user, likes, comments, date },
 }) => {
@@ -60,7 +61,7 @@ const Post = ({
                 </Button>
                 {!auth.loading && user === auth.user._id && (
                   <IconButton variant="outlined" color="secondary">
-                    <DeleteForeverIcon onClick={() => alert("no.")} />
+                    <DeleteForeverIcon onClick={() => deletePost(_id)} />
                   </IconButton>
                 )}
               </Grid>
@@ -75,6 +76,7 @@ const Post = ({
 Post.propTypes = {
   post: PropTypes.object.isRequired,
   state: PropTypes.object.isRequired,
+  deletePost: PropTypes.func.isRequired,
   addLike: PropTypes.func.isRequired,
   removeLike: PropTypes.func.isRequired,
 };
@@ -82,4 +84,6 @@ Post.propTypes = {
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
-export default connect(mapStateToProps, { addLike, removeLike })(Post);
+export default connect(mapStateToProps, { deletePost, addLike, removeLike })(
+  Post
+);
