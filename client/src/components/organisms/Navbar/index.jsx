@@ -30,6 +30,11 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         </CustomLink>
       </Button>
       <Button color="inherit">
+        <CustomLink to="/posts" color="white">
+          Posts
+        </CustomLink>
+      </Button>
+      <Button color="inherit">
         <AccountBox />
         <CustomLink to="/dashboard" color="white">
           Dashboard

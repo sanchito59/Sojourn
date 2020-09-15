@@ -8,6 +8,7 @@ import Landing from './components/pages/Landing';
 import Dashboard from './components/pages/Dashboard';
 import Profiles from './components/pages/Profiles';
 import Profile from './components/pages/Profile';
+import Posts from './components/pages/Posts';
 import PrivateRoute from './components/molecules/PrivateRoute';
 import CreateProfile from './components/molecules/Forms/CreateProfile';
 import EditProfile from './components/molecules/Forms/EditProfile';
@@ -47,6 +48,7 @@ const App = () => {
               <PrivateRoute exact path="/edit-profile" component={EditProfile} />
               <PrivateRoute exact path="/add-experience" component={AddExperience} />
               <PrivateRoute exact path="/add-education" component={AddEducation} />
+              <PrivateRoute exact path="/posts" component={Posts} />
             </Switch>
           </>
         </>

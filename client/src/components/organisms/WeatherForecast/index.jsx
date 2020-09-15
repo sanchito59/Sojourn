@@ -1,37 +1,34 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import styled from "styled-components";
 import {
-  Box,
   Card,
   CardContent,
   CardMedia,
   Container,
-  CircularProgress,
   Typography,
 } from "@material-ui/core";
 import { getWeather } from "../../../actions/profile";
 
 const WeatherForecast = ({ getWeather, city, forecast }) => {
   useEffect(() => {
-    getWeather(city);
-  }, [getWeather]);
+    if (city.includes(",")) {
+      getWeather(city);
+    }
+  }, [getWeather, city]);
 
   const tempColor = (num) => {
     if (num > 74) {
       return "#e03800";
     } else if (num > 59) {
-      return "#f6ff4d";
+      return "rgb(221, 182, 91)";
     } else if (num > 39) {
       return "textSecondary";
     } else {
       return "#82fff9";
     }
   };
-  return forecast === null ? (
-    <CircularProgress />
-  ) : (
+  return (
     <Container maxWidth="xs">
       <Card>
         {forecast.weather && (
