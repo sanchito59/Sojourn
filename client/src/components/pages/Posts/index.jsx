@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import Post from "../Post";
+import PostForm from "../../molecules/Forms/PostForm";
 
 const Posts = ({ getPosts, post: { posts, loading } }) => {
   useEffect(() => {
@@ -26,6 +27,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
         </Typography>
       </Box>
       <Grid container spacing={3}>
+        <PostForm />
         {posts.map((post) => {
           return <Post key={post._id} post={post} />;
         })}

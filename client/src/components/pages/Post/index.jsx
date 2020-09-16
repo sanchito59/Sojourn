@@ -30,7 +30,12 @@ const Post = ({
       <CustomPaper padding="12" marginTop="20px">
         <Grid container>
           <Grid item sm={2} xs={2} align="center">
-            <ProfilePicture src={avatar} alt={`Profile picture for ${name}`} />
+            <CustomLink to={`explorer/${user}`} color="white">
+              <ProfilePicture
+                src={avatar}
+                alt={`Profile picture for ${name}`}
+              />
+            </CustomLink>
             <Typography variant="body2">{name}</Typography>
           </Grid>
           <Grid item sm={10} xs={10}>

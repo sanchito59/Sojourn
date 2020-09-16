@@ -24,9 +24,9 @@ const Dashboard = ({
 }) => {
   useEffect(() => {
     getCurrentProfile();
-  }, [getCurrentProfile]);
+  }, [getCurrentProfile, loading]);
 
-  return loading && profile === null ? (
+  return loading ? (
     <CircularProgress />
   ) : (
     <Container maxWidth="lg" style={{ marginBottom: "40px" }}>
