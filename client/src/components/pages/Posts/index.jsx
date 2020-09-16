@@ -3,19 +3,21 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getPosts } from "../../../actions/post";
 import {
+  Box,
   CircularProgress,
   Container,
-  Box,
   Grid,
   Typography,
 } from "@material-ui/core";
-import Post from "../Post";
+import SinglePost from "./components/SinglePost";
 import PostForm from "../../molecules/Forms/PostForm";
 
 const Posts = ({ getPosts, post: { posts, loading } }) => {
   useEffect(() => {
     getPosts();
   }, [getPosts]);
+
+  console.log(posts);
 
   return loading ? (
     <CircularProgress />
@@ -29,7 +31,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
       <Grid container spacing={3}>
         <PostForm />
         {posts.map((post) => {
-          return <Post key={post._id} post={post} />;
+          return <SinglePost key={post._id} post={post} />;
         })}
       </Grid>
     </Container>

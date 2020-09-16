@@ -9,6 +9,7 @@ import Dashboard from './components/pages/Dashboard';
 import Profiles from './components/pages/Profiles';
 import Profile from './components/pages/Profile';
 import Posts from './components/pages/Posts';
+import Post from './components/pages/Post';
 import PrivateRoute from './components/molecules/PrivateRoute';
 import CreateProfile from './components/molecules/Forms/CreateProfile';
 import EditProfile from './components/molecules/Forms/EditProfile';
@@ -49,6 +50,7 @@ const App = () => {
               <PrivateRoute exact path="/add-experience" component={AddExperience} />
               <PrivateRoute exact path="/add-education" component={AddEducation} />
               <PrivateRoute exact path="/posts" component={Posts} />
+              <PrivateRoute exact path="/posts/:id" component={Post} />
             </Switch>
           </>
         </>
