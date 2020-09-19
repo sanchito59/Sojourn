@@ -140,7 +140,7 @@ const Profile = ({
                 {profile.bio}
               </Typography>
             </Grid>
-            {profile.social?.length > 0 && (
+            {profile.social && (
               <Grid
                 gridItem
                 sm={12}
