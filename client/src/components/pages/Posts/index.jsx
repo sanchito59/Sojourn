@@ -17,8 +17,6 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
     getPosts();
   }, [getPosts]);
 
-  console.log(posts);
-
   return loading ? (
     <CircularProgress />
   ) : (
@@ -46,4 +44,5 @@ Posts.propTypes = {
 const mapStateToProps = (state) => ({
   post: state.post,
 });
+
 export default connect(mapStateToProps, { getPosts })(Posts);

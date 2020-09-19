@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 import styled from "styled-components";
@@ -45,7 +45,7 @@ const SinglePost = ({
                 {text}
               </Grid>
               <Grid item sm={12} xs={12}>
-                Posted on {moment(date).format("ddd MMM, Do - hh:ma")}
+                Posted on {moment(date).format("ddd MMM Do | hh:mma")}
               </Grid>
               <Grid item sm={12} xs={12} style={{ display: "flex" }}>
                 <IconButton color="secondary" onClick={() => addLike(_id)}>

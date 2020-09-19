@@ -1,8 +1,16 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Breadcrumbs, CircularProgress, Typography } from "@material-ui/core";
+import {
+  Box,
+  Breadcrumbs,
+  Container,
+  CircularProgress,
+  Typography,
+} from "@material-ui/core";
 import SinglePost from "../Posts/components/SinglePost";
+import CommentForm from "../../molecules/Forms/CommentForm";
+import Comment from "./components/Comment";
 import CustomLink from "../../atoms/CustomLink";
 import { getPost } from "../../../actions/post";
 
@@ -22,6 +30,14 @@ const Post = ({ getPost, post: { post, loading }, match }) => {
         <Typography color="textPrimary">TITLE WILL GO HERE</Typography>
       </Breadcrumbs>
       <SinglePost showActions={false} post={post} />
+      <CommentForm postId={post._id} />
+      <Container>
+        <Box my={4}>
+          {post.comments.map((comment) => {
+            return <Comment postId={post._id} comment={comment} />;
+          })}
+        </Box>
+      </Container>
     </>
   );
 };

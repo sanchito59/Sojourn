@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
-import { GET_POSTS, GET_POST, ADD_POST, DELETE_POST, POST_ERROR, UPDATE_LIKES } from './types';
+import { GET_POSTS, GET_POST, ADD_POST, DELETE_POST, POST_ERROR, UPDATE_LIKES, ADD_COMMENT, REMOVE_COMMENT } from './types';
 
 // GET ALL POSTS
 export const getPosts = () => async dispatch => {
@@ -68,6 +68,45 @@ export const deletePost = (id) => async dispatch => {
   }
 };
 
+// ADD A COMMENT
+export const addComment = (postId, formData) => async dispatch => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    const res = await axios.post(`/api/posts/comment/${postId}`, formData, config);
+
+    dispatch({ type: ADD_COMMENT, payload: res.data });
+
+    dispatch(setAlert('Comment added!', 'success'));
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// DELETE A COMMENT
+export const deleteComment = (postId, commentId) => async dispatch => {
+  try {
+
+    await axios.delete(`/api/posts/comment/${postId}/${commentId}`);
+
+    dispatch({ type: REMOVE_COMMENT, payload: commentId });
+
+    dispatch(setAlert('Comment deleted!', 'success'));
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
 // LIKE A POST
 export const addLike = (postId) => async dispatch => {
   try {
@@ -77,6 +116,8 @@ export const addLike = (postId) => async dispatch => {
       type: UPDATE_LIKES,
       payload: { id: postId, likes: res.data }
     })
+
+    dispatch(getPost(postId)); // TODO: is this best?
   } catch (err) {
     dispatch({
       type: POST_ERROR,
@@ -94,6 +135,7 @@ export const removeLike = (postId) => async dispatch => {
       type: UPDATE_LIKES,
       payload: { id: postId, likes: res.data }
     })
+    dispatch(getPost(postId)); // TODO: is this best?
   } catch (err) {
     dispatch({
       type: POST_ERROR,

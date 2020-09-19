@@ -1,4 +1,4 @@
-import { GET_POSTS, GET_POST, ADD_POST, DELETE_POST, POST_ERROR, UPDATE_LIKES } from '../actions/types';
+import { GET_POSTS, GET_POST, ADD_POST, DELETE_POST, POST_ERROR, UPDATE_LIKES, ADD_COMMENT, DELETE_COMMENT, REMOVE_COMMENT } from '../actions/types';
 
 const initialState = {
   posts: [],
@@ -45,6 +45,18 @@ export default function (state = initialState, action) {
       return {
         ...state,
         posts: state.posts.map(post => post._id === payload.id ? { ...post, likes: payload.likes } : post), // If the post matches the payload ID, return the new likes, else return the post
+        loading: false,
+      }
+    case ADD_COMMENT:
+      return {
+        ...state,
+        post: { ...state.post, comments: payload },
+        loading: false,
+      }
+    case REMOVE_COMMENT:
+      return {
+        ...state,
+        post: { ...state.post, comments: state.post.comments.filter(comment => comment._id !== payload) },
         loading: false,
       }
     default:
