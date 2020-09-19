@@ -11,11 +11,33 @@ import CustomPaper from "../../../../atoms/CustomPaper";
 import { connect } from "react-redux";
 import { addLike, removeLike, deletePost } from "../../../../../actions/post";
 
+const PostTitle = styled(Typography)`
+  @media only screen and (max-width: 767px) {
+    font-size: 1rem;
+  }
+`;
+
+const PostText = styled(Typography)`
+  @media only screen and (max-width: 767px) {
+    font-size: 0.8rem;
+  }
+`;
+
+const UserName = styled(Typography)`
+  @media only screen and (max-width: 767px) {
+    display: none;
+  }
+`;
+
 const ProfilePicture = styled.img`
   border-radius: 50%;
   width: 100px;
   height: auto;
   object-fit: cover;
+
+  @media only screen and (max-width: 767px) {
+    width: 50px;
+  }
 `;
 
 const SinglePost = ({
@@ -24,10 +46,10 @@ const SinglePost = ({
   deletePost,
   auth,
   showActions,
-  post: { _id, text, name, avatar, user, likes, comments, date },
+  post: { _id, title, text, name, avatar, user, likes, comments, date },
 }) => {
   return (
-    <Grid item sm={12} xs={12}>
+    <Grid item sm={12} xs={12} style={{ marginBottom: "40px" }}>
       <CustomPaper padding="12" marginTop="20px">
         <Grid container>
           <Grid item sm={2} xs={2} align="center">
@@ -37,17 +59,31 @@ const SinglePost = ({
                 alt={`Profile picture for ${name}`}
               />
             </CustomLink>
-            <Typography variant="body2">{name}</Typography>
+            <UserName variant="body2">{name}</UserName>
           </Grid>
           <Grid item sm={10} xs={10}>
             <Grid container>
               <Grid item sm={12} xs={12}>
-                {text}
+                <CustomLink to={`/posts/${_id}`}>
+                  <PostTitle variant="h6">{title}</PostTitle>
+                </CustomLink>
               </Grid>
-              <Grid item sm={12} xs={12}>
-                Posted on {moment(date).format("ddd MMM Do | hh:mma")}
+              <Grid item sm={12} xs={12} style={{ marginBottom: "32px" }}>
+                <PostText variant="body2" noWrap>
+                  {text}
+                </PostText>
               </Grid>
-              <Grid item sm={12} xs={12} style={{ display: "flex" }}>
+              <Grid item sm={12} xs={12} style={{ marginTop: "-14px" }}>
+                <Typography variant="caption">
+                  Posted on {moment(date).format("ddd MMM Do | hh:mma")}
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                sm={12}
+                xs={12}
+                style={{ display: "flex", alignItems: "center" }}
+              >
                 <IconButton color="secondary" onClick={() => addLike(_id)}>
                   <Badge badgeContent={likes.length} color="secondary">
                     <FavoriteIcon />
@@ -59,7 +95,11 @@ const SinglePost = ({
                   </Badge>
                 </IconButton>
                 {showActions && (
-                  <Button variant="contained" color="primary">
+                  <Button
+                    variant="contained"
+                    size="small"
+                    style={{ height: "24px" }}
+                  >
                     <CustomLink to={`posts/${_id}`} color="white">
                       {comments.length > 0
                         ? `Comments (${comments.length})`

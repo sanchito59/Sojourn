@@ -26,7 +26,7 @@ const CommentForm = ({ addComment, postId }) => {
             name=""
             value={text}
             onChange={(e) => setText(e.target.value)}
-            style={{ width: "90%", height: "200px" }}
+            style={{ width: "90%", height: "100px" }}
           />
           <br />
           <Button

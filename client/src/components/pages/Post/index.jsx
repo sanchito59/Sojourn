@@ -23,12 +23,14 @@ const Post = ({ getPost, post: { post, loading }, match }) => {
     <CircularProgress />
   ) : (
     <>
-      <Breadcrumbs aria-label="breadcrumb" style={{ marginTop: "40px" }}>
-        <CustomLink color="inherit" to="/posts">
-          Posts
-        </CustomLink>
-        <Typography color="textPrimary">TITLE WILL GO HERE</Typography>
-      </Breadcrumbs>
+      <Container>
+        <Breadcrumbs aria-label="breadcrumb" style={{ marginTop: "40px" }}>
+          <CustomLink color="inherit" to="/posts">
+            Posts
+          </CustomLink>
+          <Typography color="textPrimary">{post.title}</Typography>
+        </Breadcrumbs>
+      </Container>
       <SinglePost showActions={false} post={post} />
       <CommentForm postId={post._id} />
       <Container>
