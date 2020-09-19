@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 import { connect } from "react-redux";
 import {
   Button,
@@ -11,6 +12,12 @@ import {
 } from "@material-ui/core";
 import { addPost } from "../../../../actions/post";
 
+const CallToAction = styled(Typography)`
+  @media only screen and (max-width: 767px) {
+    font-size: 1.6rem;
+  }
+`;
+
 const PostForm = ({ addPost }) => {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
@@ -18,9 +25,9 @@ const PostForm = ({ addPost }) => {
   return (
     <Container>
       <Box my={4}>
-        <Typography variant="h4" component="h1" paragraph>
+        <CallToAction variant="h4" component="h1" paragraph>
           Find something interesting?
-        </Typography>
+        </CallToAction>
         <form
           onSubmit={(e) => {
             e.preventDefault();
