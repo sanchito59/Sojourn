@@ -36,7 +36,7 @@ router.post(
     auth,
     [
       check('status', 'Status is required').not().isEmpty(),
-      check('hobbies', 'Hobbies is required').not().isEmpty()
+      check('hobbies', 'Hobbies are required').not().isEmpty()
     ]
   ],
   async (req, res) => {
