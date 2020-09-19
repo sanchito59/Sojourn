@@ -45,6 +45,12 @@ export const addPost = (formData) => async dispatch => {
 
     dispatch(setAlert('Post created', 'success'));
   } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach(error => dispatch(setAlert(error.msg, 'error')));
+    }
+
     dispatch({
       type: POST_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }

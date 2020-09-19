@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button, Box, Container, Typography } from "@material-ui/core";
+import {
+  Button,
+  Box,
+  Container,
+  TextField,
+  Typography,
+  FormControl,
+} from "@material-ui/core";
 import { addPost } from "../../../../actions/post";
 
 const PostForm = ({ addPost }) => {
+  const [title, setTitle] = useState("");
   const [text, setText] = useState("");
 
   return (
@@ -16,14 +24,23 @@ const PostForm = ({ addPost }) => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            addPost({ text });
+            addPost({ title, text });
             setText("");
+            setTitle("");
           }}
         >
+          <FormControl style={{ marginBottom: "16px" }}>
+            <TextField
+              type="text"
+              onChange={(e) => setTitle(e.target.value)}
+              value={title}
+              label="Post Title"
+              placeholder="What'd you find?"
+            />
+          </FormControl>
           <textarea
             type="text"
             placeholder="Post it here!"
-            name=""
             value={text}
             onChange={(e) => setText(e.target.value)}
             style={{ width: "90%", height: "200px" }}
