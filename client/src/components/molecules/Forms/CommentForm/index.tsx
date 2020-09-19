@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Button, Box, Container, Typography } from "@material-ui/core";
 import { addComment } from "../../../../actions/post";
 
-const CommentForm = ({ addComment, postId }) => {
+const CommentForm = ({
+  addComment,
+  postId,
+}: {
+  addComment: Function;
+  postId: string;
+}) => {
   const [text, setText] = useState("");
 
   return (
@@ -21,7 +26,6 @@ const CommentForm = ({ addComment, postId }) => {
           }}
         >
           <textarea
-            type="text"
             placeholder="Post it here..."
             name=""
             value={text}
@@ -40,10 +44,6 @@ const CommentForm = ({ addComment, postId }) => {
       </Box>
     </Container>
   );
-};
-
-CommentForm.propTypes = {
-  addComment: PropTypes.func.isRequired,
 };
 
 export default connect(null, { addComment })(CommentForm);
