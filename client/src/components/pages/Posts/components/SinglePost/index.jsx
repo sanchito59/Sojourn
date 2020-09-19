@@ -31,7 +31,7 @@ const SinglePost = ({
       <CustomPaper padding="12" marginTop="20px">
         <Grid container>
           <Grid item sm={2} xs={2} align="center">
-            <CustomLink to={`explorer/${user}`} color="white">
+            <CustomLink to={`/explorer/${user}`} color="white">
               <ProfilePicture
                 src={avatar}
                 alt={`Profile picture for ${name}`}

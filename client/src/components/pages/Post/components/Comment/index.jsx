@@ -40,7 +40,7 @@ const Comment = ({
     <List className={classes.root}>
       <ListItem alignItems="flex-start" style={{ width: "100%" }}>
         <ListItemAvatar>
-          <CustomLink to={`explorer/${user}`} color="white">
+          <CustomLink to={`/explorer/${user}`} color="white">
             <Avatar alt={name} src={avatar} />
           </CustomLink>
         </ListItemAvatar>
