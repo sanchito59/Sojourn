@@ -1,5 +1,0 @@
-{
-  "mongoURI": "mongodb+srv://sanchito59:my_new_password@chroma.5o9p1.mongodb.net/Chroma?retryWrites=true&w=majority",
-  "jwtSecret": "my_secret_token",
-  "openWeatherKey": "6455e34125b0c3092d63c733270035ad"
-}
