@@ -1,11 +1,19 @@
 import React from "react";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import styled from "styled-components";
+import { connect } from "react-redux";
 import { logout } from "../../../actions/auth";
 import { makeStyles } from "@material-ui/core/styles";
 import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
 import { Explore, ExitToApp, AccountBox } from "@material-ui/icons";
 import CustomLink from "../../atoms/CustomLink";
+
+const SiteNameSpan = styled.span`
+  margin-left: 12px;
+  @media only screen and (max-width: 767px) {
+    display: none;
+  }
+`;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -73,7 +81,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           <Explore />
           <Typography variant="h6" className={classes.title}>
             <CustomLink to="/" color="white">
-              Sojourn
+              <SiteNameSpan>Sojourn</SiteNameSpan>
             </CustomLink>
           </Typography>
           {!loading && <>{isAuthenticated ? authControls : guestControls}</>}

@@ -4,6 +4,7 @@ import Navbar from './components/organisms/Navbar';
 import CustomAlert from './components/atoms/CustomAlert';
 import Register from './components/organisms/auth/Register';
 import Login from './components/organisms/auth/Login';
+import PageNotFound from './components/pages/PageNotFound';
 import Landing from './components/pages/Landing';
 import Dashboard from './components/pages/Dashboard';
 import Profiles from './components/pages/Profiles';
@@ -36,10 +37,10 @@ const App = () => {
       <Router>
         <>
           <Navbar />
-          <Route exact path="/" component={Landing} />
           <>
             <CustomAlert />
             <Switch>
+              <Route exact path="/" component={Landing} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/explorers" component={Profiles} />
@@ -51,6 +52,7 @@ const App = () => {
               <PrivateRoute exact path="/add-education" component={AddEducation} />
               <PrivateRoute exact path="/posts" component={Posts} />
               <PrivateRoute exact path="/posts/:id" component={Post} />
+              <Route component={PageNotFound} />
             </Switch>
           </>
         </>
