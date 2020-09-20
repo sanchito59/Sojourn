@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import Moment from "react-moment";
-import PropTypes from "prop-types";
 import {
   Button,
   Table,
@@ -12,34 +11,50 @@ import {
   TableRow,
 } from "@material-ui/core";
 import CustomPaper from "../../atoms/CustomPaper";
-import { deleteEducation } from "../../../actions/profile";
+import { deleteExperience } from "../../../actions/profile";
 
-const EducationList = ({ education, deleteEducation, privateView }) => {
+interface Provider {
+  _id: string;
+  company: string;
+  title: string;
+  from: string;
+  to: string;
+}
+
+const ExperienceList = ({
+  experience,
+  deleteExperience,
+  privateView,
+}: {
+  experience: Array<Provider>;
+  deleteExperience: Function;
+  privateView: Boolean;
+}) => {
   return (
-    <CustomPaper marginTop="20">
+    <CustomPaper marginTop={20}>
       <TableContainer>
-        <Table aria-label="Education Table">
+        <Table aria-label="Work Experience Table">
           <TableHead>
             <TableRow>
-              <TableCell>School</TableCell>
-              <TableCell>Degree</TableCell>
+              <TableCell>Company</TableCell>
+              <TableCell>Title</TableCell>
               <TableCell>Years</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {education.map((edu) => {
+            {experience.map((exp) => {
               return (
-                <TableRow key={edu._id}>
+                <TableRow key={exp._id}>
                   <TableCell component="th" scope="row">
-                    {edu.school}
+                    {exp.company}
                   </TableCell>
-                  <TableCell>{edu.degree}</TableCell>
+                  <TableCell>{exp.title}</TableCell>
                   <TableCell>
-                    <Moment format="MMMM Do YYYY">{edu.from}</Moment> -{" "}
-                    {edu.to === null ? (
+                    <Moment format="MMMM Do YYYY">{exp.from}</Moment> -{" "}
+                    {exp.to === null ? (
                       " Now"
                     ) : (
-                      <Moment format="MMMM Do YYYY">{edu.to}</Moment>
+                      <Moment format="MMMM Do YYYY">{exp.to}</Moment>
                     )}
                   </TableCell>
                   {!privateView && (
@@ -47,7 +62,7 @@ const EducationList = ({ education, deleteEducation, privateView }) => {
                       <Button
                         variant="contained"
                         color="secondary"
-                        onClick={() => deleteEducation(edu._id)}
+                        onClick={() => deleteExperience(exp._id)}
                       >
                         DELETE
                       </Button>
@@ -63,14 +78,8 @@ const EducationList = ({ education, deleteEducation, privateView }) => {
   );
 };
 
-EducationList.propTypes = {
-  education: PropTypes.array.isRequired,
-  deleteEducation: PropTypes.func.isRequired,
-  privateView: PropTypes.bool,
-};
-
-EducationList.defaultProps = {
+ExperienceList.defaultProps = {
   privateView: false,
 };
 
-export default connect(null, { deleteEducation })(EducationList);
+export default connect(null, { deleteExperience })(ExperienceList);

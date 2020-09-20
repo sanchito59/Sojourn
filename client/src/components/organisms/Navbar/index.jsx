@@ -10,6 +10,7 @@ import CustomLink from "../../atoms/CustomLink";
 
 const SiteNameSpan = styled.span`
   margin-left: 12px;
+
   @media only screen and (max-width: 767px) {
     display: none;
   }
@@ -78,7 +79,9 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Explore />
+          <CustomLink to="/" color="white">
+            <Explore />
+          </CustomLink>
           <Typography variant="h6" className={classes.title}>
             <CustomLink to="/" color="white">
               <SiteNameSpan>Sojourn</SiteNameSpan>

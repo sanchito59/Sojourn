@@ -25,4 +25,10 @@ const CustomPaper = ({
   );
 };
 
+CustomPaper.defaultProps = {
+  elevation: 1,
+  padding: 20,
+  marginTop: 20,
+};
+
 export default CustomPaper;
