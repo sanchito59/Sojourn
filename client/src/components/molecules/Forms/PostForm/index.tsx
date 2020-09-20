@@ -41,27 +41,29 @@ const PostForm = ({ addPost }: { addPost: Function }) => {
         <CallToAction variant="h4" component="h1" paragraph>
           Find something interesting?
         </CallToAction>
-        <Map
-          center={[44.29296554197513, -122.88739542796756]}
-          zoom={14}
-          onClick={(e: Event) => addMarker(e)}
-          doubleClickZoom={false}
-        >
-          <ScaleControl position="bottomright" />
-          <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          {markers.map((position, idx) => (
-            <Marker key={`marker-${idx}`} position={position}>
-              <Popup>
-                <span>
-                  A pretty CSS3 popup. <br /> Easily customizable.
-                </span>
-              </Popup>
-            </Marker>
-          ))}
-        </Map>
+        <div style={{ margin: "32px 0px" }}>
+          <Map
+            center={[44.29296554197513, -122.88739542796756]}
+            zoom={14}
+            onClick={(e: Event) => addMarker(e)}
+            doubleClickZoom={false}
+          >
+            <ScaleControl position="bottomright" />
+            <TileLayer
+              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            {markers.map((position, idx) => (
+              <Marker key={`marker-${idx}`} position={position}>
+                <Popup>
+                  <span>
+                    A pretty CSS3 popup. <br /> Easily customizable.
+                  </span>
+                </Popup>
+              </Marker>
+            ))}
+          </Map>
+        </div>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -79,12 +81,11 @@ const PostForm = ({ addPost }: { addPost: Function }) => {
               onChange={(e) => setTitle(e.target.value)}
               value={title}
               label="Post Title"
-              placeholder="What'd you find?"
             />
           </FormControl>
 
           <textarea
-            placeholder="Post it here!"
+            placeholder="What'd you find?"
             value={text}
             onChange={(e) => setText(e.target.value)}
             style={{ width: "90%", height: "200px" }}
