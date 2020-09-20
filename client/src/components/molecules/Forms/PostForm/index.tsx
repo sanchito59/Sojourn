@@ -9,6 +9,9 @@ import {
   Typography,
   FormControl,
 } from "@material-ui/core";
+import { Map, Marker, Popup, TileLayer, ScaleControl } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import "./map.css";
 import { addPost } from "../../../../actions/post";
 
 const CallToAction = styled(Typography)<any>`
@@ -20,6 +23,17 @@ const CallToAction = styled(Typography)<any>`
 const PostForm = ({ addPost }: { addPost: Function }) => {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
+  const [markers, setMarkers] = useState([]);
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+
+  const addMarker = (e: any) => {
+    const markers: any = [];
+    markers.push(e.latlng);
+    setMarkers(markers);
+    setLatitude(markers[0].lat);
+    setLongitude(markers[0].lng);
+  };
 
   return (
     <Container>
@@ -27,15 +41,39 @@ const PostForm = ({ addPost }: { addPost: Function }) => {
         <CallToAction variant="h4" component="h1" paragraph>
           Find something interesting?
         </CallToAction>
+        <Map
+          center={[44.29296554197513, -122.88739542796756]}
+          zoom={14}
+          onClick={(e: Event) => addMarker(e)}
+          doubleClickZoom={false}
+        >
+          <ScaleControl position="bottomright" />
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          {markers.map((position, idx) => (
+            <Marker key={`marker-${idx}`} position={position}>
+              <Popup>
+                <span>
+                  A pretty CSS3 popup. <br /> Easily customizable.
+                </span>
+              </Popup>
+            </Marker>
+          ))}
+        </Map>
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            addPost({ title, text });
+            addPost({ title, text, latitude, longitude });
             setText("");
             setTitle("");
+            setLatitude(null);
+            setLongitude(null);
+            setMarkers([]);
           }}
         >
-          <FormControl style={{ marginBottom: "16px" }}>
+          <FormControl style={{ marginBottom: "32px" }}>
             <TextField
               type="text"
               onChange={(e) => setTitle(e.target.value)}
@@ -44,6 +82,7 @@ const PostForm = ({ addPost }: { addPost: Function }) => {
               placeholder="What'd you find?"
             />
           </FormControl>
+
           <textarea
             placeholder="Post it here!"
             value={text}
