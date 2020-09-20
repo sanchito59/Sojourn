@@ -2,7 +2,7 @@
   "name": "sojourn",
   "version": "1.0.0",
   "description": "Sharing locations off the beaten path",
-  "main": "server.js",
+  "main": "server.ts",
   "scripts": {
     "client-install": "npm install --prefix client",
     "start": "node server",
@@ -15,6 +15,7 @@
   "author": "Chris Sanchez, @sanchito59",
   "license": "MIT",
   "dependencies": {
+    "@types/node": "^14.11.1",
     "bcryptjs": "^2.4.3",
     "config": "^3.3.1",
     "express": "^4.17.1",
