@@ -4,7 +4,6 @@ const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
 
 const User = require('../../models/User');
-const Profile = require('../../models/Profile');
 const Post = require('../../models/Post');
 
 // @route       POST api/posts
@@ -28,6 +27,8 @@ router.post(
       const newPost = new Post({
         title: req.body.title,
         text: req.body.text,
+        latitude: req.body.latitude,
+        longitude: req.body.longitude,
         name: user.name,
         avatar: user.avatar,
         user: req.user.id,
