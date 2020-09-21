@@ -29,7 +29,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
       <Grid container spacing={3}>
         <PostForm />
         {posts.map((post) => {
-          return <SinglePost key={post._id} post={post} />;
+          return <SinglePost key={post._id} post={post} displayMap={false} />;
         })}
       </Grid>
     </Container>

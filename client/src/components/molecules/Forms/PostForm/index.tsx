@@ -10,7 +10,6 @@ import {
   FormControl,
 } from "@material-ui/core";
 import { Map, Marker, Popup, TileLayer, ScaleControl } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
 import "./map.css";
 import { addPost } from "../../../../actions/post";
 
@@ -57,7 +56,7 @@ const PostForm = ({ addPost }: { addPost: Function }) => {
               <Marker key={`marker-${idx}`} position={position}>
                 <Popup>
                   <span>
-                    A pretty CSS3 popup. <br /> Easily customizable.
+                    {latitude}, {longitude}
                   </span>
                 </Popup>
               </Marker>

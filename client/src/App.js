@@ -22,6 +22,7 @@ import store from './store';
 import setAuthToken from './utils/setAuthToken';
 
 import './App.css';
+import "leaflet/dist/leaflet.css";
 
 if (localStorage.token) {
   // @TODO: No local storage

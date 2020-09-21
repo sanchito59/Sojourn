@@ -6,9 +6,13 @@ import { Badge, Button, Grid, IconButton, Typography } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import ExploreIcon from "@material-ui/icons/Explore";
+import MapComponent from "../../../../molecules/MapComponent";
+import RoomIcon from "@material-ui/icons/Room";
 import CustomLink from "../../../../atoms/CustomLink";
 import CustomPaper from "../../../../atoms/CustomPaper";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { addLike, removeLike, deletePost } from "../../../../../actions/post";
 
 const PostTitle = styled(Typography)`
@@ -46,8 +50,23 @@ const SinglePost = ({
   deletePost,
   auth,
   showActions,
-  post: { _id, title, text, name, avatar, user, likes, comments, date },
+  displayMap,
+  post: {
+    _id,
+    title,
+    text,
+    latitude,
+    longitude,
+    name,
+    avatar,
+    user,
+    likes,
+    comments,
+    date,
+  },
 }) => {
+  const history = useHistory();
+
   return (
     <Grid item sm={12} xs={12} style={{ marginBottom: "40px" }}>
       <CustomPaper padding="12" marginTop="20px">
@@ -63,10 +82,23 @@ const SinglePost = ({
           </Grid>
           <Grid item sm={10} xs={10}>
             <Grid container>
-              <Grid item sm={12} xs={12}>
+              <Grid item sm={12} xs={12} style={{ display: "flex" }}>
                 <CustomLink to={`/posts/${_id}`}>
                   <PostTitle variant="h6">{title}</PostTitle>
                 </CustomLink>
+                {latitude && longitude && (
+                  <span style={{ marginLeft: "8px" }}>
+                    <ExploreIcon
+                      style={{ marginTop: "4px", color: "rgb(106, 106, 106)" }}
+                    />
+                    <RoomIcon
+                      style={{
+                        marginTop: "4px",
+                        color: "rgba(223, 43, 43, 0.87)",
+                      }}
+                    />
+                  </span>
+                )}
               </Grid>
               <Grid item sm={12} xs={12} style={{ marginBottom: "32px" }}>
                 <PostText variant="body2" noWrap>
@@ -109,13 +141,26 @@ const SinglePost = ({
                 )}
                 {!auth.loading && user === auth.user._id && (
                   <IconButton variant="outlined" color="secondary">
-                    <DeleteForeverIcon onClick={() => deletePost(_id)} />
+                    <DeleteForeverIcon
+                      onClick={() => {
+                        deletePost(_id);
+                        history.push("/posts");
+                      }}
+                    />
                   </IconButton>
                 )}
               </Grid>
             </Grid>
           </Grid>
         </Grid>
+        {displayMap && latitude && longitude && (
+          <MapComponent
+            markers={[{ lat: latitude, lng: longitude }]}
+            latitude={latitude}
+            longitude={longitude}
+            zoom={13}
+          />
+        )}
       </CustomPaper>
     </Grid>
   );
@@ -128,10 +173,12 @@ SinglePost.propTypes = {
   addLike: PropTypes.func.isRequired,
   removeLike: PropTypes.func.isRequired,
   showActions: PropTypes.bool,
+  displayMap: PropTypes.bool,
 };
 
 SinglePost.defaultProps = {
   showActions: true,
+  displayMap: true,
 };
 
 const mapStateToProps = (state) => ({
