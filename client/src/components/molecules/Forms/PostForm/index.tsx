@@ -10,7 +10,6 @@ import {
   FormControl,
 } from "@material-ui/core";
 import { Map, Marker, Popup, TileLayer, ScaleControl } from "react-leaflet";
-import "./map.css";
 import { addPost } from "../../../../actions/post";
 
 const CallToAction = styled(Typography)<any>`
@@ -33,6 +32,16 @@ const PostForm = ({ addPost }: { addPost: Function }) => {
     setLatitude(markers[0].lat);
     setLongitude(markers[0].lng);
   };
+
+  const L = require("leaflet");
+
+  delete L.Icon.Default.prototype._getIconUrl;
+
+  L.Icon.Default.mergeOptions({
+    iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
+    iconUrl: require("leaflet/dist/images/marker-icon.png"),
+    shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
+  });
 
   return (
     <Container>
