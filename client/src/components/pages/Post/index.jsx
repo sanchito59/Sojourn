@@ -6,9 +6,11 @@ import {
   Breadcrumbs,
   Container,
   CircularProgress,
+  Grid,
   Typography,
 } from "@material-ui/core";
 import SinglePost from "../Posts/components/SinglePost";
+import MapComponent from "../../molecules/MapComponent";
 import CommentForm from "../../molecules/Forms/CommentForm";
 import Comment from "./components/Comment";
 import CustomLink from "../../atoms/CustomLink";
@@ -19,19 +21,43 @@ const Post = ({ getPost, post: { post, loading }, match }) => {
     getPost(match.params.id);
   }, [getPost]);
 
+  const columnSize = post?.latitude && post?.longitude ? 7 : 12;
+
   return loading || post === null ? (
     <CircularProgress />
   ) : (
     <>
       <Container>
-        <Breadcrumbs aria-label="breadcrumb" style={{ marginTop: "40px" }}>
+        <Breadcrumbs aria-label="breadcrumb" style={{ margin: "40px 0px" }}>
           <CustomLink color="inherit" to="/posts">
             Posts
           </CustomLink>
           <Typography color="textPrimary">{post.title}</Typography>
         </Breadcrumbs>
       </Container>
-      <SinglePost showActions={false} post={post} />
+      <Container>
+        <Grid container>
+          <Grid gridItem xs={12} lg={columnSize}>
+            <SinglePost
+              showActions={false}
+              post={post}
+              displayMap={false}
+              noWrap={false}
+            />
+          </Grid>
+          {post.latitude && post.longitude && (
+            <Grid gridItem xs={12} sm={5}>
+              <Container>
+                <MapComponent
+                  latitude={post.latitude}
+                  longitude={post.longitude}
+                  markers={[{ lat: post.latitude, lng: post.longitude }]}
+                />
+              </Container>
+            </Grid>
+          )}
+        </Grid>
+      </Container>
       <CommentForm postId={post._id} />
       <Container>
         <Box my={4}>

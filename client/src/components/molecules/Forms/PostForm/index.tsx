@@ -32,7 +32,7 @@ const PostForm = ({ addPost }: { addPost: Function }) => {
     setLatitude(markers[0].lat);
     setLongitude(markers[0].lng);
   };
-
+  // @TODO: serve dist in deployment build?
   const L = require("leaflet");
 
   delete L.Icon.Default.prototype._getIconUrl;

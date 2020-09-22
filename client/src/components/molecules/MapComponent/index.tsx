@@ -27,6 +27,7 @@ const MapComponent = ({
   mapWidth: number;
   mapHeight: number;
 }) => {
+  // @TODO: serve dist in deployment build?
   const L = require("leaflet");
 
   delete L.Icon.Default.prototype._getIconUrl;
@@ -38,7 +39,7 @@ const MapComponent = ({
   });
 
   return (
-    <div style={{ margin: "32px 0px" }}>
+    <div>
       <StyledMap
         center={[latitude, longitude]}
         zoom={zoom}

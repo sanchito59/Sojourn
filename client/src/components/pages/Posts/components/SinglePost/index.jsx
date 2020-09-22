@@ -51,6 +51,7 @@ const SinglePost = ({
   auth,
   showActions,
   displayMap,
+  noWrap,
   post: {
     _id,
     title,
@@ -101,7 +102,7 @@ const SinglePost = ({
                 )}
               </Grid>
               <Grid item sm={12} xs={12} style={{ marginBottom: "32px" }}>
-                <PostText variant="body2" noWrap>
+                <PostText variant="body2" noWrap={noWrap}>
                   {text}
                 </PostText>
               </Grid>
@@ -174,11 +175,13 @@ SinglePost.propTypes = {
   removeLike: PropTypes.func.isRequired,
   showActions: PropTypes.bool,
   displayMap: PropTypes.bool,
+  noWrap: PropTypes.bool,
 };
 
 SinglePost.defaultProps = {
   showActions: true,
   displayMap: true,
+  noWrap: true,
 };
 
 const mapStateToProps = (state) => ({
