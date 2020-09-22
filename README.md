@@ -6,7 +6,9 @@
 
 [Sojourn](https://sojourn-mern.herokuapp.com) is a social site based around sharing locations that are off-the-beaten path or otherwise obscure. It is a Fullstack MERN application partially built with TypeScript (converting currently!). It features profiles, posts, likes, and comments, as well as other views! The backend was built with Node.js and Express with TypeScript and bcrypt. The frontend is a React app built partially with TypeScript, using Redux as a state library. The frontend designs were built with Material UI and Styled Components.
 
-![image of Sojourn](https://i.imgur.com/aRWpNOt.jpg "read")
+![image of Sojourn post](https://i.imgur.com/QGMLesZ.png "read")
+
+![image of different Sojourn views](https://i.imgur.com/aRWpNOt.jpg "read")
 
 - - - 
 
