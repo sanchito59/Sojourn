@@ -20,11 +20,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
   title: {
     flexGrow: 1,
+  },
+  button: {
+    margin: theme.spacing(1),
   },
 }));
 
@@ -33,24 +33,28 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
   const authControls = (
     <>
-      <Button color="inherit">
-        <CustomLink to="/explorers" color="white">
-          Explorers
-        </CustomLink>
-      </Button>
+      <CustomLink to="/dashboard" color="white">
+        <Button
+          color="inherit"
+          className={classes.button}
+          startIcon={<AccountBox />}
+        >
+          <SiteNameSpan style={{ marginLeft: "0px" }}>Dashboard</SiteNameSpan>
+        </Button>
+      </CustomLink>
       <Button color="inherit">
         <CustomLink to="/posts" color="white">
           Posts
         </CustomLink>
       </Button>
       <Button color="inherit">
-        <AccountBox />
-        <CustomLink to="/dashboard" color="white">
-          Dashboard
+        <CustomLink to="/explorers" color="white">
+          Explorers
         </CustomLink>
       </Button>
       <Button color="inherit" onClick={logout}>
-        <ExitToApp /> Logout
+        <ExitToApp />
+        <SiteNameSpan>Logout</SiteNameSpan>
       </Button>
     </>
   );
@@ -58,8 +62,8 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const guestControls = (
     <>
       <Button color="inherit">
-        <CustomLink to="/explorers" color="white">
-          Explorers
+        <CustomLink to="/login" color="white">
+          Login
         </CustomLink>
       </Button>
       <Button color="inherit">
@@ -68,8 +72,8 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         </CustomLink>
       </Button>
       <Button color="inherit">
-        <CustomLink to="/login" color="white">
-          Login
+        <CustomLink to="/explorers" color="white">
+          Explorers
         </CustomLink>
       </Button>
     </>
@@ -77,7 +81,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" style={{ background: "rgb(39, 55, 34)" }}>
         <Toolbar>
           <CustomLink to="/" color="white">
             <Explore />

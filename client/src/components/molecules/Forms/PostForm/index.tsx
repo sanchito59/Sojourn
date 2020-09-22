@@ -5,10 +5,12 @@ import {
   Button,
   Box,
   Container,
+  IconButton,
   TextField,
   Typography,
   FormControl,
 } from "@material-ui/core";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { Map, Marker, Popup, TileLayer, ScaleControl } from "react-leaflet";
 import { addPost } from "../../../../actions/post";
 
@@ -47,7 +49,7 @@ const PostForm = ({ addPost }: { addPost: Function }) => {
     <Container>
       <Box my={4}>
         <CallToAction variant="h4" component="h1" paragraph>
-          Find something interesting?
+          Find something interesting?{" "}
         </CallToAction>
         <div style={{ margin: "32px 0px" }}>
           <Map
@@ -67,6 +69,15 @@ const PostForm = ({ addPost }: { addPost: Function }) => {
                   <span>
                     {latitude}, {longitude}
                   </span>
+                  <IconButton>
+                    <DeleteForeverIcon
+                      onClick={() => {
+                        setLatitude(null);
+                        setLongitude(null);
+                        setMarkers([]);
+                      }}
+                    />
+                  </IconButton>
                 </Popup>
               </Marker>
             ))}
