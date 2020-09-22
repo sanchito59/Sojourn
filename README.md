@@ -1,4 +1,4 @@
-# [Sojourn](https://sojourn-mern.herokuapp.com)
+# [Sojourn (in development)](https://sojourn-mern.herokuapp.com)
 
 ## By **Chris Sanchez**
 
@@ -52,6 +52,7 @@
 ### [Backend Libraries](https://github.com/sanchito59/mern_sojourn/blob/master/package.json)
 
 ### [Frontend Libraries](https://github.com/sanchito59/mern_sojourn/blob/master/client/package.json)
+
  - - -
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
